@@ -1,0 +1,26 @@
+{
+  "name": "website-optimized-cloudfront",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish:test": "serverless publish --dev",
+    "lint": "eslint src --fix --cache"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@serverless/platform-client": "^0.24.0",
+    "axios": "^0.19.2",
+    "babel-eslint": "9.0.0",
+    "dotenv": "^8.2.0",
+    "eslint": "5.6.0",
+    "eslint-config-prettier": "^3.6.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "jest": "^25.1.0",
+    "prettier": "^1.15.3"
+  }
+}

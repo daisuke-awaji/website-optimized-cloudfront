@@ -1,0 +1,14 @@
+# serverless.component.yml
+
+name: website-optimized-cloudfront
+version: 0.0.4
+author: gee.awa
+org: geeawa
+main: ./src
+description: Deploys Serverless React/Vue Apps to S3 (Cached by CloudFront)
+keywords: aws, serverless, react, vue, s3, cloudfront
+repo: https://github.com/daisuke-awaji/website-optimized-cloudfront
+license: MIT
+types:
+  providers:
+    - aws
