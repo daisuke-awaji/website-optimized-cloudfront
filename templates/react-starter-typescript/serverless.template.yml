@@ -1,0 +1,6 @@
+name: react-starter-typescript
+org: geeawa
+description: Deploys a serverless react website on AWS
+keywords: aws, serverless, website, frontend, react
+repo: https://github.com/daisuke-awaji/website-optimized-cloudfront
+license: MIT

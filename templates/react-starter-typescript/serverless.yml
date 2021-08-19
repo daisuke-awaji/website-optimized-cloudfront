@@ -1,0 +1,9 @@
+name: react-starter-typescript
+component: website-optimized-cloudfront@dev
+org: geeawa
+
+inputs:
+  src:
+    src: ./src
+    hook: yarn build
+    dist: ./build
