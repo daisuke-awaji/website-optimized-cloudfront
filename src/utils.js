@@ -888,6 +888,14 @@ const deleteCloudFrontDistribution = async (clients, distributionId) => {
   }
 }
 
+const deleteEdgeLambda = async (clients, functionArn) => {
+  return await clients.lambda
+    .deleteFunction({
+      FunctionName: functionArn
+    })
+    .promise()
+}
+
 const removeDomainFromCloudFrontDistribution = async (clients, config) => {
   try {
     const params = await clients.cf
@@ -1121,6 +1129,7 @@ module.exports = {
   removeDomainFromCloudFrontDistribution,
   removeCloudFrontDomainDnsRecords,
   removeAllRoles,
+  deleteEdgeLambda,
   getMetrics,
   publishEdgeLambda
 }

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const { publishEdgeLambda, getClients } = require('./utils')
+const { publishEdgeLambda, deleteEdgeLambda, getClients } = require('./utils')
 require('dotenv').config()
 /*
  * Fetches AWS credentials from the current environment
@@ -25,9 +25,10 @@ beforeAll(() => {
   jest.setTimeout(300000)
 })
 
-it('publish cloudfront function and delete it.', async () => {
+it.skip('publish cloudfront function and delete it.', async () => {
   const credentials = getCredentials()
   const clients = getClients(credentials.aws, 'us-east-1')
   const deployedFunction = await publishEdgeLambda(clients)
   console.log(deployedFunction)
+  await deleteEdgeLambda(clients, deployedFunction.FunctionArn)
 })

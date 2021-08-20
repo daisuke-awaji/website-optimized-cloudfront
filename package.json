@@ -1,16 +1,16 @@
 {
   "name": "website-optimized-cloudfront",
   "version": "1.0.0",
-  "description": "",
+  "description": "Instantly deploy static website on serverless infrastructure with zero configuration using Serverless Components. Fully optimized website by cloudfront.",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --testEnvironment node",
     "test:watch": "jest --watchAll --testEnvironment node",
     "publish:test": "serverless publish --dev",
     "lint": "eslint src --fix --cache"
   },
   "keywords": [],
-  "author": "",
+  "author": "daisuke-awaji",
   "license": "ISC",
   "dependencies": {
     "@serverless/platform-client": "^0.24.0",

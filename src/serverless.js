@@ -17,6 +17,7 @@ const {
   removeDomainFromCloudFrontDistribution,
   removeCloudFrontDomainDnsRecords,
   deleteCloudFrontDistribution,
+  deleteEdgeLambda,
   createOrUpdateMetaRole,
   removeAllRoles,
   getMetrics
@@ -187,8 +188,9 @@ class Website extends Component {
       await deleteCloudFrontDistribution(clients, this.state.distributionId)
     }
 
-    // TODO
-    // await deleteEdgeLambda(clients, this.state.FunctionArn)
+    // You can delete a Lambda@Edge function only when the replicas of the function have been deleted by CloudFront.
+    // https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-edge-delete-replicas.html
+    // await deleteEdgeLambda(clients, this.state.edgeLambdaFunctionArn)
 
     log(`Website ${config.bucketName} was successfully removed from region ${config.region}`)
 
