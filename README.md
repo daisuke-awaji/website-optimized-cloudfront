@@ -21,7 +21,7 @@
 - [x] **CDN, SSL & Custom Domains** - Comes with free CDN, SSL & custom domains out of the box.
 - [x] **Team Collaboration** - Collaborate with your teammates with shared state and outputs.
 - [x] **Built-in Monitoring** - Monitor your website right from the Serverless Dashboard.
-- [x] **Cache** - Cache static contents in Browser and CloudFront. ⚡️ Optimized CloudFront ⚡️
+- [x] **Cache** - Cache static contents in Browser and CloudFront. **Fastest content load time ~10ms** ⚡️ Optimized CloudFront ⚡️
 - [*] **Client Side Routing** - Support Edge Cache even in the situation of client side routing. ⚡️ Optimized Client Side Routing ⚡️
 
 <br/>
