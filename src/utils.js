@@ -47,6 +47,8 @@ const getClients = (credentials, region) => {
       })
     },
     cf: new AWS.CloudFront(params),
+    lambda: new AWS.Lambda(params),
+    iam: new AWS.IAM(params),
     route53: new AWS.Route53(params),
     extras: new AWS.Extras(params),
     acm: new AWS.ACM({
@@ -510,7 +512,55 @@ const ensureCertificate = async (clients, config) => {
   return certificateArn
 }
 
+const publishEdgeLambda = async (clients) => {
+  const functionName = `website-cache-cloudfront-function-${generateId()}`
+  const role = await clients.iam
+    .createRole({
+      RoleName: `${functionName}-role`,
+      AssumeRolePolicyDocument: JSON.stringify({
+        Version: '2012-10-17',
+        Statement: [
+          {
+            Effect: 'Allow',
+            Principal: {
+              Service: 'lambda.amazonaws.com'
+            },
+            Action: 'sts:AssumeRole'
+          },
+          {
+            Effect: 'Allow',
+            Principal: {
+              Service: 'edgelambda.amazonaws.com'
+            },
+            Action: 'sts:AssumeRole'
+          }
+        ]
+      })
+    })
+    .promise()
+
+  // https://stackoverflow.com/questions/36419442/the-role-defined-for-the-function-cannot-be-assumed-by-lambda#answer-37438525
+  await sleep(10000)
+
+  const deployedFunction = await clients.lambda
+    .createFunction({
+      Code: {
+        ZipFile: fs.readFileSync(path.resolve(__dirname, './edgeFunction.js.zip'))
+      },
+      PackageType: 'Zip',
+      FunctionName: functionName,
+      Role: role.Role.Arn,
+      Runtime: 'nodejs14.x',
+      Handler: 'edgeFunction.handler',
+      Publish: true
+    })
+    .promise()
+  log(deployedFunction)
+  return deployedFunction
+}
+
 const createCloudFrontDistribution = async (clients, config) => {
+  const fnc = await publishEdgeLambda(clients)
   const params = {
     DistributionConfig: {
       CallerReference: String(Date.now()),
@@ -597,8 +647,13 @@ const createCloudFrontDistribution = async (clients, config) => {
         MaxTTL: 31536000,
         Compress: true,
         LambdaFunctionAssociations: {
-          Quantity: 0,
-          Items: []
+          Quantity: 1,
+          Items: [
+            {
+              EventType: 'origin-request',
+              LambdaFunctionARN: fnc.FunctionArn + ':' + fnc.Version
+            }
+          ]
         },
         FieldLevelEncryptionId: ''
       },
@@ -642,7 +697,8 @@ const createCloudFrontDistribution = async (clients, config) => {
       distributionUrl: res.Distribution.DomainName,
       distributionOrigins: config.distributionOrigins,
       distributionDefaults: config.distributionDefaults,
-      distributionDescription: config.distributionDescription
+      distributionDescription: config.distributionDescription,
+      edgeLambdaFunctionArn: fnc.FunctionArn
     }
   } catch (e) {
     // throw a friendly error if trying to use an existing domain
@@ -1065,5 +1121,6 @@ module.exports = {
   removeDomainFromCloudFrontDistribution,
   removeCloudFrontDomainDnsRecords,
   removeAllRoles,
-  getMetrics
+  getMetrics,
+  publishEdgeLambda
 }

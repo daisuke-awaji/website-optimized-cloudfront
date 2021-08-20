@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "jest --watchAll --testEnvironment node",
     "publish:test": "serverless publish --dev",
     "lint": "eslint src --fix --cache"
   },

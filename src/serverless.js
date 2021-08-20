@@ -187,6 +187,9 @@ class Website extends Component {
       await deleteCloudFrontDistribution(clients, this.state.distributionId)
     }
 
+    // TODO
+    // await deleteEdgeLambda(clients, this.state.FunctionArn)
+
     log(`Website ${config.bucketName} was successfully removed from region ${config.region}`)
 
     this.state = {}
