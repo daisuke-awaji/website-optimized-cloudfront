@@ -1,7 +1,5 @@
 name: react-starter
 component: website-optimized-cloudfront@dev
-org: geeawa
-
 inputs:
   src:
     src: ./src

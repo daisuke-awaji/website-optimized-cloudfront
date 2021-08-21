@@ -1,6 +1,5 @@
 name: react-starter-typescript
 component: website-optimized-cloudfront
-org: geeawa
 
 inputs:
   src:

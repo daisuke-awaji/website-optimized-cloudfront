@@ -6,7 +6,7 @@
 
 <p align="center">
   <b>
-    This component forked from <a href="https://github.com/serverless-components/website"> serverless-component/website</a>.
+    This component forked from <a href="https://github.com/serverless-components/website"> serverless-components/website</a>.
   </b>
 </p>
 
@@ -22,11 +22,7 @@
 - [x] **Team Collaboration** - Collaborate with your teammates with shared state and outputs.
 - [x] **Built-in Monitoring** - Monitor your website right from the Serverless Dashboard.
 - [x] **Cache** - Cache static contents in Browser and CloudFront. **Fastest content load time ~10ms** ⚡️ Optimized CloudFront ⚡️
-- [*] **Client Side Routing** - Support Edge Cache even in the situation of client side routing. ⚡️ Optimized Client Side Routing ⚡️
-
-<br/>
-
-Check out the **[Serverless Fullstack Application](https://github.com/serverless-components/fullstack-app)** for a ready-to-use boilerplate and overall great example of how to use this Component.
+- [x] **Client Side Routing** - Support Edge Cache even in the situation of client side routing. ⚡️ Optimized Client Side Routing ⚡️
 
 <br/>
 
@@ -42,6 +38,44 @@ Check out the **[Serverless Fullstack Application](https://github.com/serverless
 - [**FAQs**](#faqs)
 
 &nbsp;
+
+## 🛫 Quick Start using template
+
+The easiest way to start using the website-optimized-cloudfront component is by create one of its templates using the create command:
+
+```
+$ serverless create --template-url https://github.com/daisuke-awaji/website-optimized-cloudfront/tree/main/templates/react-starter-typescript
+$ cd react-starter-typescript
+```
+
+Install node_modules using yarn command:
+
+```
+$ yarn
+```
+
+Deploy website using serverless deploy command:
+
+```
+$ serverless deploy
+```
+
+## 🧩 Architecture
+
+Building CloudFront with S3 as the origin is not enough for client-side routing. Then Lambda@Edge intercept origin request and map request.uri into index.html. To find out more, see [this blog](https://hackernoon.com/how-to-host-a-single-page-application-with-aws-cloudfront-and-lambda-edge-39ce7b036da2).
+
+![Architecture](./assets/architecture.png)
+
+### Cache static contents
+
+CloudFront and Browser cache contents. The cache expiration period is as follows.
+
+| File                         | Browser  | CloudFront |
+| ---------------------------- | -------- | ---------- |
+| html                         | no-store | 1 day      |
+| css, js, json, ico, png etc. | 1 day    | 1 day      |
+
+## 🍕 Basic Usage
 
 ### Install
 
