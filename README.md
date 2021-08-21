@@ -1,5 +1,3 @@
-# Serverless Website Component (Optimized CloudFront)
-
 [![Serverless Components](./assets/main.png)](http://serverless.com)
 
 <br/>
