@@ -62,6 +62,23 @@ Deploy website using serverless deploy command:
 $ serverless deploy
 ```
 
+Then deploy your website at cloudfront and s3. 
+This is [Example Website](https://d142ko8z7ee8vf.cloudfront.net). Click and Reload it. Experience the performance!!
+
+```
+serverless ⚡components
+Action: "deploy" - Stage: "dev" - Org: "geeawa" - App: "react-starter-typescript" - Name: "react-starter-typescript"
+
+bucket:          website-gszixa
+distributionUrl: https://d142ko8z7ee8vf.cloudfront.net
+bucketUrl:       http://website-gszixa.s3-website.us-east-1.amazonaws.com
+url:             https://d142ko8z7ee8vf.cloudfront.net
+
+Full details: https://app.serverless.com/geeawa/apps/react-starter-typescript/react-starter-typescript/dev
+
+31s › Serverless › Success
+```
+
 ## 🧩 Architecture
 
 Building CloudFront with S3 as the origin is not enough for client-side routing. Then Lambda@Edge intercept origin request and map request.uri into index.html. To find out more, see [this blog](https://hackernoon.com/how-to-host-a-single-page-application-with-aws-cloudfront-and-lambda-edge-39ce7b036da2).
