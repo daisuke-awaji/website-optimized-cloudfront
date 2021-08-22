@@ -26,6 +26,8 @@
 
 <img src="./assets/deploy-demo.gif" height="250" align="right">
 
+<br/>
+
 - [**Install**](#install)
 - [**Initialize**](#init)
 - [**Deploy**](#deploy)
@@ -34,6 +36,8 @@
 - [**Get Info**](#get-info)
 - [**Remove**](#remove)
 - [**FAQs**](#faqs)
+
+<br/>
 
 &nbsp;
 
@@ -172,3 +176,7 @@ The website component will then use all the data it needs from the built-in stat
 ```
 $ serverless remove --debug
 ```
+
+**Note**
+
+Using the serverless remove command does not remove edge @ lambda. You need to wait about a day after CloudFront is removed and then remove it manually. [See more](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-edge-delete-replicas.html)
