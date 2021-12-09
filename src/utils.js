@@ -556,6 +556,20 @@ const publishEdgeLambda = async (clients) => {
     })
     .promise()
   log(deployedFunction)
+
+  let fnState = undefined
+  let retryCount = 0
+  while (fnState !== 'Active' && retryCount < 3) {
+    const fn = await clients.lambda
+      .getFunction({
+        FunctionName: deployedFunction.FunctionName
+      })
+      .promise()
+    fnState = fn.Configuration.State
+    await sleep(3000)
+    retryCount++
+  }
+
   return deployedFunction
 }
 

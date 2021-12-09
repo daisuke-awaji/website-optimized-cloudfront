@@ -1,6 +1,6 @@
 {
   "name": "website-optimized-cloudfront",
-  "version": "1.0.0",
+  "version": "0.0.5",
   "description": "Instantly deploy static website on serverless infrastructure with zero configuration using Serverless Components. Fully optimized website by cloudfront.",
   "main": "index.js",
   "scripts": {
