@@ -62,8 +62,8 @@ Deploy website using serverless deploy command:
 $ serverless deploy
 ```
 
-Then deploy your website at cloudfront and s3. 
-This is [Example Website](https://d142ko8z7ee8vf.cloudfront.net). Click and Reload it. Experience the performance!!
+Then deploy your website at cloudfront and s3.
+This is [Example Website](https://d1ct2nd0zhgbdm.cloudfront.net/). Click and Reload it. Experience the performance!!
 
 ```
 serverless ⚡components

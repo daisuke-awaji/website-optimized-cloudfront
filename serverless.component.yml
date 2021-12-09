@@ -1,7 +1,7 @@
 # serverless.component.yml
 
 name: website-optimized-cloudfront
-version: 0.0.4
+version: 0.0.5
 author: gee.awa
 org: geeawa
 main: ./src

@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+const { sleep } = require('@serverless/platform-client/src/utils')
 const { publishEdgeLambda, deleteEdgeLambda, getClients } = require('./utils')
 require('dotenv').config()
 /*
@@ -31,4 +32,23 @@ it.skip('publish cloudfront function and delete it.', async () => {
   const deployedFunction = await publishEdgeLambda(clients)
   console.log(deployedFunction)
   await deleteEdgeLambda(clients, deployedFunction.FunctionArn)
+})
+
+it('get lambda status', async () => {
+  const credentials = getCredentials()
+  const clients = getClients(credentials.aws, 'us-east-1')
+  const deployedFunction = await publishEdgeLambda(clients)
+
+  let fn = undefined
+  let retryCount = 0
+  while (fn?.Configuration?.State !== 'Active' && retryCount < 3) {
+    fn = await clients.lambda
+      .getFunction({
+        FunctionName: deployedFunction.FunctionName
+      })
+      .promise()
+    console.log({ lambdaState: fn.Configuration.State })
+    await sleep(3000)
+    retryCount++
+  }
 })
